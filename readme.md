@@ -12,9 +12,10 @@ https://github.com/entertainmenttechnology/Earle-MTEC3320-TechProduction
 ## Description
 This course provides an opportunity for students to apply the skills they've acquired in the course of pursuing their degree to a collaboratively implemented project. We will work together to create a game that combines aspects of physical computing, integrated systems design, and fabrication.
 
-## Recommended Text
+## Recommended Texts
 + [Getting Started with Arduino, 3rd Edition](https://www.amazon.com/Getting-Started-Arduino-Massimo-Banzi/dp/1449309879) by Massimo Banzi
 + [Learning Processing](http://learningprocessing.com/) by Daniel Shiffman
++ [Disobedient Electronics](http://www.disobedientelectronics.com/)
 
 ## Attendance
 Punctuality is one of the most respected virtues in the industry. If you have a reputation for showing up on time, you will always find people willing to trust you and to hire you. Use this class as an opportunity to build the habit of punctuality. It will be very difficult for you to learn the material if you are not in class. If you must come in late, please be respectful of the class and try not to disturb anyone as you enter. If you know ahead of time that you will be late or absent, please contact me before the start of class so we can arrange for you to make up material you will be missing.
