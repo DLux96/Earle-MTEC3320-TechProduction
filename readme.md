@@ -7,7 +7,7 @@ https://github.com/entertainmenttechnology/Earle-MTEC3320-TechProduction
 ## Instructor
 + Grayson Earle
 + gearle@citytech.cuny.edu
-+ Office Hours: V-203, Tuesday: 12-12:50, Wednesday: 12-2:15, and by appointment
++ Office Hours: V-203, Monday: 12-12:50, Wednesday: 12-2:15, and by appointment
 
 ## Description
 This course provides an opportunity for students to apply the skills they've acquired in the course of pursuing their degree to a collaboratively implemented project. We will work together to create a game that combines aspects of physical computing, integrated systems design, and fabrication.
