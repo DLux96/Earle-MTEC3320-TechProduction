@@ -16,3 +16,6 @@
 + [GDC alt.ctrl video](https://www.youtube.com/watch?v=upI_BdpH1Z0)
 	+ [List of 2018 games](http://www.gdconf.com/news/games-youll-play-gdc-2018s-alt-ctrl-gdc-showcase/)
 	+ [List of 2017 games](http://www.gdconf.com/news/heres-lineup-games-playable-gdc-2017s-alt-ctrl-gdc-showcase/)
+
+## Idea Generation
++ 20 Ideas in 20 Minutes
