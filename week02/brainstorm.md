@@ -1,14 +1,5 @@
-# Week 02
-
-## Narrowing In
-
-+ See brainstorm notes below
-
 ## Homework
 
-+ In one paragraph, describe a hypothetical object or puzzle involved in one of these games. Describe it. What does it look like, what is it made of, what does it do, etc?
-
-# Brainstorm
 ## Limitations
 	+ Modular
 	+ NO budget
@@ -81,3 +72,16 @@
 	+ 15-30 minutes
 	+ 1) Disable alarm 2) Get USB 3) Escape
 	+ Secret compartments
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
