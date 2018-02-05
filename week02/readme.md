@@ -6,7 +6,7 @@
 
 ## Homework
 
-+ In one paragraph, describe a hypothetical object or puzzle involved in one of these games. Describe it. What does it look like, what is it made of, what does it do, etc?
++ In one paragraph, describe a hypothetical object or puzzle involved in one of the three group brainstorms. Describe it. What does it look like, what is it made of, what does it do, etc?
 
 # Brainstorm
 ## Limitations
