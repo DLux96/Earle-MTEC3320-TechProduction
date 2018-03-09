@@ -62,11 +62,6 @@ int sequence = 0;     //for tracking progress through puzzle
 
 bool solve = 0;       //true when puzzle solved
 
-//add init blinking LEDs "come touch me"
-//big red button to start game
-//audio & led patterns
-//match timbre/pattern of audio playing - ßmax/msp
-
 void setup()
 {
   pinMode(led01R_pin, OUTPUT);
@@ -113,57 +108,57 @@ void setup()
 
   pinMode(button01_pin, INPUT);
 
-  Serial.begin(9600);
+  Serial.begin(19200);
 }
 
 void loop()
 {
-  analogWrite(jackOut01_pin, 255);
-  analogWrite(jackOut02_pin, 190);
-  analogWrite(jackOut03_pin, 127);
-  analogWrite(jackOut04_pin, 64);
+  analogWrite(jackOut01_pin, 1023);
+  analogWrite(jackOut02_pin, 768);
+  analogWrite(jackOut03_pin, 512);
+  analogWrite(jackOut04_pin, 256);
   
   jackIn01_state = analogRead(jackIn01_pin);
   jackIn02_state = analogRead(jackIn02_pin);
   jackIn03_state = analogRead(jackIn03_pin);
   jackIn04_state = analogRead(jackIn04_pin);
 
-  Serial.println(jackIn01_state);
-
+  jackRead(jackIn01_state);
+  
 }
 
 void jackRead(int j)   //function for analog values at input jacks
 {
-//  if (j > 768)                      //768 to 1023
-//  {
-//    Serial.println("01");
-//    
-//    digitalWrite(led01R_pin, HIGH);
-//    digitalWrite(led01G_pin, HIGH);
-//    digitalWrite(led01B_pin, HIGH);
-//  }
-//  else if (j > 512)                 //512 to 768
-//  {
-//    Serial.println("02");
-//
-//    digitalWrite(led02R_pin, HIGH);
-//    digitalWrite(led02G_pin, HIGH);
-//    digitalWrite(led02B_pin, HIGH);
-//  }
-//  else if (j > 256)                 //256 to 512
-//  {
-//    Serial.println("03");
-//
-//    digitalWrite(led03R_pin, HIGH);
-//    digitalWrite(led03G_pin, HIGH);
-//    digitalWrite(led03B_pin, HIGH);
-//  }
-//  else                              //0 to 256
-//  {
-//    Serial.println("04");
-//
-//    digitalWrite(led04R_pin, HIGH);
-//    digitalWrite(led04G_pin, HIGH);
-//    digitalWrite(led04B_pin, HIGH);
-//  }
+  if (j > 768)                      //768 to 1023
+  {
+    Serial.println("01");
+    
+    digitalWrite(led01R_pin, HIGH);
+    digitalWrite(led01G_pin, HIGH);
+    digitalWrite(led01B_pin, HIGH);
+  }
+  else if (j > 512)                 //512 to 768
+  {
+    Serial.println("02");
+
+    digitalWrite(led02R_pin, HIGH);
+    digitalWrite(led02G_pin, HIGH);
+    digitalWrite(led02B_pin, HIGH);
+  }
+  else if (j > 256)                 //256 to 512
+  {
+    Serial.println("03");
+
+    digitalWrite(led03R_pin, HIGH);
+    digitalWrite(led03G_pin, HIGH);
+    digitalWrite(led03B_pin, HIGH);
+  }
+  else                              //0 to 256
+  {
+    Serial.println("04");
+
+    digitalWrite(led04R_pin, HIGH);
+    digitalWrite(led04G_pin, HIGH);
+    digitalWrite(led04B_pin, HIGH);
+  }
 }
