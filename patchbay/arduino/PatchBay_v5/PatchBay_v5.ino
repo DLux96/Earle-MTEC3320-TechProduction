@@ -4,6 +4,8 @@ long lastDebounceTime = 0;
 
 int range = 5;
 
+int maxRun = 0;
+
 const int led01R_pin = 22;
 const int led01G_pin = 23;
 const int led01B_pin = 24;
@@ -119,23 +121,27 @@ void loop()
   //int val03 = debounce(read03);
   //int val04 = debounce(read04);
 
-  for (int i = 0; i < 4; i++)
+  int maxRead = Serial.read();
+  if (maxRead == 5)
   {
-    if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
-    {
-      a[i] = '1';
-    }
-    else
-    {
-      a[i] = '0';
-    }
+    maxRun = 1;  
   }
-  Serial.print(a);
-
-//  if (prev != a) {
-//    Serial.println(a);
-//    prev = a;
-//  }
+  
+  if (maxRun == 1)
+  {
+    for (int i = 0; i < 4; i++)
+    {
+      if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
+      {
+        a[i] = '1';
+      }
+      else
+      {
+        a[i] = '0';
+      }
+    }
+    Serial.print(a);
+  }
 }
 
 
