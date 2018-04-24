@@ -2,7 +2,7 @@ String a = "0000";
 
 long lastDebounceTime = 0;
 
-int range = 10;
+int range = 1;
 
 int maxRun = 0;
 
@@ -137,22 +137,22 @@ void randomize ( int arr[], int n ) //needed for swaping jackThresh array
     }
 }
 
-void blowUp(char jack,int index){
-  
-
-
-if (prev[index]== '0' && jack =='2'){
-  Serial.println("counter added");
-  counter++;
-  
-  }
-  else{
-    Serial.println("not added");
-  }
-  prev[index] = jack;
- 
-  Serial.println(counter);
-}
+//void blowUp(char jack,int index){
+//  
+//
+//
+//if (prev[index]== '0' && jack =='2'){
+//  Serial.println("counter added");
+//  counter++;
+//  
+//  }
+//  else{
+//    Serial.println("not added");
+//  }
+//  prev[index] = jack;
+// 
+//  Serial.println(counter);
+//}
 
 void loop()
 {
@@ -184,14 +184,14 @@ void loop()
       else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
       {
         a[i] = '0'; //if its nothing is plug in aka noise 
-        blowUp(a[i], i);
+//        blowUp(a[i], i);
       }
       else
       {
         a[i] = '2'; //if its wrong jackThresh 
-        blowUp(a[i],i);
+//        blowUp(a[i],i);
       }
-    //Serial.println(a);
+    Serial.println(a);
   }
 }
 };
@@ -236,3 +236,4 @@ void loop()
   return 0;
 }
 */
+

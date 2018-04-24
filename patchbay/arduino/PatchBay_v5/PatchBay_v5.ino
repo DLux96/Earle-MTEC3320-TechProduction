@@ -136,8 +136,8 @@ void randomize ( int arr[], int n )
 
 void loop()
 {
-  int read01 = analogRead(jackIn01_pin);
-  int read02 = analogRead(jackIn02_pin);
+  int read01 = analogRead(jackIn01_pin); //reading values coming from the A0
+  int read02 = analogRead(jackIn02_pin); //reading values coming from the A1...
   int read03 = analogRead(jackIn03_pin);
   int read04 = analogRead(jackIn04_pin);
 
@@ -145,11 +145,9 @@ void loop()
   //int val02 = debounce(read02);
   //int val03 = debounce(read03);
   //int val04 = debounce(read04);
-  
-
 
   
-  int maxRead = Serial.read();
+  int maxRead = Serial.read(); //initializing serial from max to ardunio aka commuciate to max
   if (maxRead == 5)
   {
     maxRun = 1;  
@@ -157,20 +155,24 @@ void loop()
   
   if (true)
   {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++) //loop over from A0 to A4 comparing the value from the array.
     { 
       if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
       {
-        a[i] = '1';
+        a[i] = '1'; //if the jackThresh[0]is == to jack thresh[0] aka correct connection
+      }
+      else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
+      {
+        a[i] = '0'; //if its nothing is plug in aka noise 
       }
       else
       {
-        a[i] = '0';
+        a[i] = '2'; //if its wrong jackThresh 
       }
-    }
     Serial.println(a);
   }
 }
+};
 
 
 //void circuitCheck(int v, int x, int m) //Not sure if we will still use this...
@@ -185,25 +187,25 @@ void loop()
 //  }
 //}
 
-int debounce(int jackValue) //FIX DIS!
-{
-  int debounceDelay = 5;
-  int lastValue = jackValue;
-  int newJackValue;
-
-  if (jackValue != lastValue)
-  {
-    lastDebounceTime = millis();
-  }
-
-  if ((millis() - lastDebounceTime) > debounceDelay)
-  {
-    if (jackValue == newJackValue)
-    {
-      newJackValue = jackValue;
-      lastDebounceTime = millis();
-      return newJackValue;
-    }
-  }
-  return 0;
-}
+//int debounce(int jackValue) //FIX DIS!
+//{
+//  int debounceDelay = 5;
+//  int lastValue = jackValue;
+//  int newJackValue;
+//
+//  if (jackValue != lastValue)
+//  {
+//    lastDebounceTime = millis();
+//  }
+//
+//  if ((millis() - lastDebounceTime) > debounceDelay)
+//  {
+//    if (jackValue == newJackValue)
+//    {
+//      newJackValue = jackValue;
+//      lastDebounceTime = millis();
+//      return newJackValue;
+//    }
+//  }
+//  return 0;
+//}
