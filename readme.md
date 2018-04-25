@@ -1,4 +1,5 @@
 # ENT-3320 Technical Production
+## VAULT 3320: The Fight for Financial Aid
 New York City College of Technology, Spring 2018
 
 ## Class site
