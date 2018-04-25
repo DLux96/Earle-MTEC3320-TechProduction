@@ -1,0 +1,44 @@
+void newClock()
+{
+
+
+  sec = interval -int(millis()/1000);
+  //sec -= 1;
+  sec -= 1;
+
+  if (sec <= 0 ) {
+    sec = 60;
+    //reset();
+    
+    
+      ctime = cduration - (millis() - cbegin)/1000;
+    }
+  } 
+
+  if (min >= 15) {
+  }
+
+  //  textSize(30);
+  fill(0, 102, 153, 204);
+  text(floor(dt), width/2, height/2);
+  text(floor(min), width/2 - 180, height/2);
+  //  text(floor(hour), width/2 +60, height/2);
+
+  //Blinking Dots
+
+  if (sec % 2 == 0) {
+    col = color(255);
+  } else {
+    col = color(0);
+  }
+  fill(0, 102, 153, 204);
+  ellipse(width/2 - 50, height/2 -50, 8, 8);
+  ellipse(width/2 - 50, height/2, 8, 8);
+  //  ellipse(width/2 +25, height/2, -15, 8);
+  //  ellipse(width/2 +25, height/2 + 15, 8, 8);
+}
+
+void reset() {
+  sec = 60;
+  setting = true;
+}
