@@ -1,3 +1,4 @@
+//FULLY COMPLETE VERSION
 //4 Different Sequence that corresponds to each codename/color
 //Each player must input their sequence to be cleared from the alarm system
 //Once each player has entered their sequence, system resets, hackerman gives them the go
