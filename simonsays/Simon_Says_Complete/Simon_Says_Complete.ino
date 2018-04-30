@@ -5,14 +5,14 @@
 
 //ss,fail = when player fails a sequences
 //ss,succeed = **
-
+//
 #include <SoftwareSerial.h>
 
 SoftwareSerial mySerial(50, 52); // RX, TX
 
 
 int ledPins[] = {8, 9, 10, 11};
-int buttons[] = {4, 5, 6, 7};
+int buttons[] = {3, 4, 5, 6};
 //ButtonsBuff is for the time between presses, buttonsPR is when
 //the buttons is pressed to not count multiple times
 long buttonsPR[] = {0, 0, 0, 0};
@@ -46,9 +46,11 @@ void setup() {
     pinMode(ledPins[i], OUTPUT);
     pinMode(buttons[i], INPUT_PULLUP);
     //RED
-    pinMode(22, OUTPUT);
-    //BLUE
     pinMode(24, OUTPUT);
+    
+    //BLUE
+    pinMode(25, OUTPUT);
+    
     //GREEN
     pinMode(26, OUTPUT);
   }
@@ -56,15 +58,14 @@ void setup() {
 }
 
 void loop() {
-  if (startGame == true) {
+ if (startGame == true) {
 
-    //create if statement that will run game when system is ready
+//    //create if statement that will run game when system is ready
 
-    //Game System tells players they will get their pattern, they have to take
-    //turns after each completed sequence.
-    Serial.println ("You will each get a pattern, each person must complete the pattern to leave.")
+//    //Game System tells players they will get their pattern, they have to take
+//    //turns after each completed sequence
 
-    //gameState 0 begins, pattern is created, sequence prevented from repeating
+//    //gameState 0 begins, pattern is created, sequence prevented from repeating
     if (gameState == 0) {
       randomSeed(analogRead(4));
 
@@ -80,9 +81,9 @@ void loop() {
 
     }
 
-    //gameState 1 begins, LEDs flash, pattern begins, 1st LED turns on, pattern displays
-    if (gameState == 1) {
-      //LEDs are OFF
+//    //gameState 1 begins, LEDs flash, pattern begins, 1st LED turns on, pattern displays
+   if (gameState == 1) {
+//      //LEDs are OFF
       for (int i = 0; i < 4; i++) {
         digitalWrite(ledPins[i], LOW);
       }
@@ -98,13 +99,13 @@ void loop() {
       Serial.println("gameState = " + String(gameState));
     }
 
-    //gameState 2 begins, user inputs the pattern, if pattern is correct move on to next gameState
-    //if user input this in wrong, pattern resets, should have 3 tries max
+//    //gameState 2 begins, user inputs the pattern, if pattern is correct move on to next gameState
+//    //if user input this in wrong, pattern resets, should have 3 tries max
 
     if (gameState == 2) {
       for (int i = 0; i < patternLength; i++) {
         if (digitalRead(buttons[i]) == LOW && previousState[i] == HIGH) {
-          // Button is pressed within a certain time so the button doesnt count multiple times
+//          // Button is pressed within a certain time so the button doesnt count multiple times
           if (millis() > buttonsPR[i] + buttonsBuff) {
 
             userPattern[userIndex] = i;
@@ -131,12 +132,13 @@ void loop() {
           }
         }
 
-        // Game System tells the players that the player got it correct after each time the
-        // player gets it right
-        Serial.println("You have bypassed the fire wall")
+//        // Game System tells the players that the player got it correct after each time the
+//        // player gets it right
+
 
         if (patternCorrect == true) {
-          Serial.println("You have bypassed the fire wall")
+          digitalWrite(26, LOW);
+          delay(500);
           digitalWrite(26, HIGH);
           delay(500);
           digitalWrite(26, LOW);
@@ -153,7 +155,7 @@ void loop() {
           patternLength++;
           gameState = 0;
           Serial.println("gameState = " + String(gameState));
-          // Resets the player's input
+//          // Resets the player's input
           userIndex = 0;
           if (patternLength == 8) {
             gameState = 3;
@@ -161,22 +163,23 @@ void loop() {
           }
         }
 
-        // Game System tells the players when they get something wrong and how many
-        // chances they1 have left before the pattern changes.
+//        // Game System tells the players when they get something wrong and how many
+//        // chances they1 have left before the pattern changes.
 
         else if (patternCorrect == false) {
-          Serial.println ("Incorrect," +  tries + " attempts remaining.")
-          digitalWrite(22, HIGH);
+          digitalWrite(25, LOW);
           delay(500);
-          digitalWrite(22, LOW);
+          digitalWrite(25, HIGH);
+          delay(500);
+          digitalWrite(25, LOW);
           delay (500);
-          digitalWrite(22, HIGH);
+          digitalWrite(25, HIGH);
           delay(500);
-          digitalWrite(22, LOW);
+          digitalWrite(25, LOW);
           delay (500);
-          digitalWrite(22, HIGH);
+          digitalWrite(25, HIGH);
           delay(500);
-          digitalWrite(22, LOW);
+          digitalWrite(25, LOW);
           delay (500);
           Serial.println("gameState " + String(gameState));
           // Resets the player's input to 0 and replays the code
@@ -200,17 +203,18 @@ void loop() {
         }
       }
     }
-  }
-  else{
+ }
+  else {
     //wait for serial acknowledgement for starting the game
-    while(mySerial.available() > 0){
-      if (mySerial.read() == '3'){
+    while (Serial.available() > 0) {
+      if (Serial.read() == '3') {
         startGame = true;
       }
     }
-    
+
     Serial.println("Waiting for start signal");
     delay(500);
   }
   
-}
+ }
+
