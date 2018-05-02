@@ -1,3 +1,6 @@
+#include<SoftwareSerial.h>;
+SoftwareSerial mySerial(2,3); //rx, tx
+
 String a = "0000";
 
 long lastDebounceTime = 0;
@@ -6,38 +9,38 @@ int range = 1;
 
 int maxRun = 0;
 
-const int led01R_pin = 22;
+const int led01B_pin = 22;
 const int led01G_pin = 23;
-const int led01B_pin = 24;
+const int led01R_pin = 24;
 
-const int led02R_pin = 25;
+const int led02B_pin = 25;
 const int led02G_pin = 26;
-const int led02B_pin = 27;
+const int led02R_pin = 27;
 
-const int led03R_pin = 28;
+const int led03B_pin = 28;
 const int led03G_pin = 29;
-const int led03B_pin = 30;
+const int led03R_pin = 30;
 
-const int led04R_pin = 31;
+const int led04B_pin = 31;
 const int led04G_pin = 32;
-const int led04B_pin = 33;
+const int led04R_pin = 33;
 
 //RGB LEDs - Bottom Row
-const int led05R_pin = 34;
+const int led05B_pin = 34;
 const int led05G_pin = 35;
-const int led05B_pin = 36;
+const int led05R_pin = 36;
 
-const int led06R_pin = 37;
+const int led06B_pin = 37;
 const int led06G_pin = 38;
-const int led06B_pin = 39;
+const int led06R_pin = 39;
 
-const int led07R_pin = 40;
+const int led07B_pin = 40;
 const int led07G_pin = 41;
-const int led07B_pin = 42;
+const int led07R_pin = 42;
 
-const int led08R_pin = 43;
+const int led08B_pin = 43;
 const int led08G_pin = 44;
-const int led08B_pin = 45;
+const int led08R_pin = 45;
 
 //INPUT JACKS - Bottom Row
 const int jackIn01_pin = A0;
@@ -52,15 +55,6 @@ const int jackThresh04 = 275;
 
 const int jackThresh[] = {797, 414, 614, 275}; //TRUE CODE
 
-int led01[3] = {0, 0, 0};
-int led02[3] = {0, 0, 0};
-int led03[3] = {0, 0, 0};
-int led04[3] = {0, 0, 0};
-int led05[3] = {0, 0, 0};
-int led06[3] = {0, 0, 0};
-int led07[3] = {0, 0, 0};
-int led08[3] = {0, 0, 0};
-
 int counter = 0;
 String prev = "0000";
 
@@ -71,42 +65,38 @@ void setup() {
   pinMode(jackIn03_pin, INPUT);
   pinMode(jackIn04_pin, INPUT);
 
-  pinMode(led01R_pin, OUTPUT);
-  pinMode(led01G_pin, OUTPUT);
   pinMode(led01B_pin, OUTPUT);
+  pinMode(led01G_pin, OUTPUT);
+  pinMode(led01R_pin, OUTPUT);
 
-  pinMode(led02R_pin, OUTPUT);
-  pinMode(led02G_pin, OUTPUT);
   pinMode(led02B_pin, OUTPUT);
+  pinMode(led02G_pin, OUTPUT);
+  pinMode(led02R_pin, OUTPUT);
 
-  pinMode(led03R_pin, OUTPUT);
-  pinMode(led03G_pin, OUTPUT);
   pinMode(led03B_pin, OUTPUT);
+  pinMode(led03G_pin, OUTPUT);
+  pinMode(led03R_pin, OUTPUT);
 
-  pinMode(led04R_pin, OUTPUT);
-  pinMode(led04G_pin, OUTPUT);
   pinMode(led04B_pin, OUTPUT);
+  pinMode(led04G_pin, OUTPUT);
+  pinMode(led04R_pin, OUTPUT);
 
-  pinMode(led05R_pin, OUTPUT);
-  pinMode(led05G_pin, OUTPUT);
   pinMode(led05B_pin, OUTPUT);
+  pinMode(led05G_pin, OUTPUT);
+  pinMode(led05R_pin, OUTPUT);
 
-  pinMode(led06R_pin, OUTPUT);
-  pinMode(led06G_pin, OUTPUT);
   pinMode(led06B_pin, OUTPUT);
+  pinMode(led06G_pin, OUTPUT);
+  pinMode(led06R_pin, OUTPUT);
 
-  pinMode(led07R_pin, OUTPUT);
-  pinMode(led07G_pin, OUTPUT);
   pinMode(led07B_pin, OUTPUT);
+  pinMode(led07G_pin, OUTPUT);
+  pinMode(led07R_pin, OUTPUT);
 
-  pinMode(led08R_pin, OUTPUT);
-  pinMode(led08G_pin, OUTPUT);
   pinMode(led08B_pin, OUTPUT);
+  pinMode(led08G_pin, OUTPUT);
+  pinMode(led08R_pin, OUTPUT);
 
-  pinMode(jackIn01_pin, INPUT);
-  pinMode(jackIn02_pin, INPUT);
-  pinMode(jackIn03_pin, INPUT);
-  pinMode(jackIn04_pin, INPUT);
 
   int n = sizeof(jackThresh)/ sizeof(jackThresh[0]);
   
@@ -179,7 +169,7 @@ void loop()
     { 
       if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
       {
-        a[i] = '1'; //if the jackThresh[0]is == to jack thresh[0] aka correct connection
+  //      a[i] = '1'; //if the jackThresh[0]is == to jack thresh[0] aka correct connection
       }
       else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
       {
@@ -194,8 +184,28 @@ void loop()
     Serial.println(a);
   }
 }
+
+
+//
+//digitalWrite(led01G_pin, HIGH);
+//digitalWrite(led02R_pin, HIGH);
+//digitalWrite(led03R_pin, HIGH);
+//digitalWrite(led04R_pin, HIGH);
+//digitalWrite(led05R_pin, HIGH);
+//digitalWrite(led06R_pin, HIGH);
+//digitalWrite(led07R_pin, HIGH);
+//digitalWrite(led08R_pin, HIGH);
+
+
+
+
 };
 
+
+/*if(a === "1111"){
+  mySerial.println("pg,bigwin");
+}
+*/
 
 
 
