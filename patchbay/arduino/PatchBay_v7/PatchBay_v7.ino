@@ -1,5 +1,5 @@
 #include<SoftwareSerial.h>;
-SoftwareSerial mySerial(2,3); //rx, tx
+SoftwareSerial mySerial(2, 3); //rx, tx
 
 String a = "0000";
 
@@ -53,7 +53,7 @@ const int jackThresh02 = 414;
 const int jackThresh03 = 614;
 const int jackThresh04 = 275;
 
-const int jackThresh[] = {797, 414, 614, 275}; //TRUE CODE
+const int jackThresh[] = {797, 414, 614, 275}; //needs to be changed!!!!
 
 int counter = 0;
 String prev = "0000";
@@ -97,158 +97,100 @@ void setup() {
   pinMode(led08G_pin, OUTPUT);
   pinMode(led08R_pin, OUTPUT);
 
+  int n = sizeof(jackThresh) / sizeof(jackThresh[0]); //what is this for????
 
-  int n = sizeof(jackThresh)/ sizeof(jackThresh[0]);
-  
   randomize (jackThresh, n);// randomize the jackthresh array
-  
+
   Serial.begin(4800);
 }
 
-void swap (int *a, int *b) //needed for swaping jackThresh array
+void swap (int *a, int *b) //needed for swapping jackThresh array
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+  int temp = *a;
+  *a = *b;
+  *b = temp;
 }
 
 void randomize ( int arr[], int n ) //needed for swaping jackThresh array
 {
-    // Use a different seed value so that we don't get same
-    // result each time we run this program
-    randomSeed(analogRead(A0));
- 
-    // Start from the last element and swap one by one. We don't
-    // need to run for the first element that's why i > 0
-    for (int i = n-1; i > 0; i--)
-    {
-        long j = random(0, n);
-        swap(&arr[i], &arr[j]);
-    }
+  // Use a different seed value so that we don't get same result each time we run this program
+  randomSeed(analogRead(A0));
+
+  // Start from the last element and swap one by one. We don't need to run for the first element that's why i > 0
+  for (int i = n - 1; i > 0; i--)
+  {
+    long j = random(0, n);
+    swap(&arr[i], &arr[j]);
+  }
 }
 
 //void blowUp(char jack,int index){
-//  
+//
 //
 //
 //if (prev[index]== '0' && jack =='2'){
 //  Serial.println("counter added");
 //  counter++;
-//  
+//
 //  }
 //  else{
 //    Serial.println("not added");
 //  }
 //  prev[index] = jack;
-// 
+//
 //  Serial.println(counter);
 //}
 
 void loop()
 {
-  int read01 = analogRead(jackIn01_pin); //reading values coming from the A0
-  int read02 = analogRead(jackIn02_pin); //reading values coming from the A1...
-  int read03 = analogRead(jackIn03_pin);
-  int read04 = analogRead(jackIn04_pin);
+  int read01 = analogRead(jackIn01_pin); //reading values coming from A0
+  int read02 = analogRead(jackIn02_pin); //reading values coming from A1
+  int read03 = analogRead(jackIn03_pin); //reading values coming from A2
+  int read04 = analogRead(jackIn04_pin); //reading values coming from A3
 
-  //int val01 = debounce(read01);
-  //int val02 = debounce(read02);
-  //int val03 = debounce(read03);
-  //int val04 = debounce(read04);
+//  Serial.print("READ_01: ");
+//  Serial.println(read01);
 
-  Serial.println(read01);
- Serial.println(read02);
-  Serial.println(read03);
-  Serial.println(read04);
+  Serial.print("READ_02: "); //NOT WORKING!!! read02 is not stable!!!
+  Serial.println(read02);
+//
+//  Serial.print("READ_03: ");
+//  Serial.println(read03);
+//
+//  Serial.print("READ_04: ");
+//  Serial.println(read04);
 
-  
-  int maxRead = Serial.read(); //initializing serial from max to ardunio aka commuciate to max
+  int maxRead = Serial.read(); //initializing serial from max to arduino aka communicate to max
   if (maxRead == 5)
   {
-    maxRun = 1;  
+    maxRun = 1;
   }
-  
+
   if (true)
   {
     for (int i = 0; i < 4; i++) //loop over from A0 to A4 comparing the value from the array.
-    { 
+    {
       if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
       {
-  //      a[i] = '1'; //if the jackThresh[0]is == to jack thresh[0] aka correct connection
+        //      a[i] = '1'; //if the jackThresh[0] is == to jack thresh[0] aka correct connection
       }
       else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
       {
-        a[i] = '0'; //if its nothing is plug in aka noise 
-//        blowUp(a[i], i);
+        a[i] = '0'; //if its nothing is plug in aka noise
+        //        blowUp(a[i], i);
       }
       else
       {
-        a[i] = '2'; //if its wrong jackThresh 
-//        blowUp(a[i],i);
+        a[i] = '2'; //if its wrong jackThresh
+        //        blowUp(a[i],i);
       }
-//   Serial.println(a);
+    }
   }
-}
-
-
-
-//digitalWrite(led01R_pin, HIGH);
-//digitalWrite(led02R_pin, HIGH);
-//digitalWrite(led03R_pin, HIGH);
-//digitalWrite(led04R_pin, HIGH);
-//digitalWrite(led05R_pin, HIGH);
-//digitalWrite(led06R_pin, HIGH);
-//digitalWrite(led07R_pin, HIGH);
-//digitalWrite(led08R_pin, HIGH);
-
-
-
-
 };
 
 
-/*if(a === "1111"){
-  mySerial.println("pg,bigwin");
-}
-*/
 
 
 
 
-//void circuitCheck(int v, int x, int m) //Not sure if we will still use this...
-//{
-//  if (v >= (x - range) && v <= (x + range))
-//  {
-//    message = m;
-//  }
-//  else
-//  {
-//    message = 0;
-//  }
-//}
-
-/*int debounce(int jackValue) //FIX DIS!
-{
-  int debounceDelay = 5;
-  int lastValue = jackValue;
-  int newJackValue;
-
-  if (jackValue != lastValue)
-  {
-    lastDebounceTime = millis();
-  }
-
-  if ((millis() - lastDebounceTime) > debounceDelay)
-  {
-    if (jackValue == newJackValue)
-    {
-      newJackValue = jackValue;
-      lastDebounceTime = millis();
-      return newJackValue;
-    }
-  }
-
-  return 0;
-}
-*/
 
