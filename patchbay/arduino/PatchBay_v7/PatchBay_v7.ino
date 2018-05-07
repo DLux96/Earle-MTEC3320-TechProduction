@@ -5,7 +5,7 @@ String a = "0000";
 
 long lastDebounceTime = 0;
 
-int range = 1;
+int range = 5;
 
 int maxRun = 0;
 
@@ -53,7 +53,10 @@ const int jackThresh02 = 414;
 const int jackThresh03 = 614;
 const int jackThresh04 = 275;
 
-const int jackThresh[] = {797, 414, 614, 275}; //needs to be changed!!!!
+const int jackThresh[] = {407, 225, 746, 760}; //needs to be changed!!!!
+
+
+int isInRangeOf[] = {0,0,0,0};
 
 int counter = 0;
 String prev = "0000";
@@ -124,22 +127,20 @@ void randomize ( int arr[], int n ) //needed for swaping jackThresh array
   }
 }
 
-//void blowUp(char jack,int index){
-//
-//
-//
-//if (prev[index]== '0' && jack =='2'){
-//  Serial.println("counter added");
-//  counter++;
-//
-//  }
-//  else{
-//    Serial.println("not added");
-//  }
-//  prev[index] = jack;
-//
+void blowUp(char jack, int index) {
+  if (prev[index] == '0' && jack == '2') {
+//    Serial.println("counter added");
+    counter++;
+
+  }
+  else {
+    //    Serial.println("not added");
+  }
+  prev[index] = jack;
+
+//  Serial.print("counter is at ");
 //  Serial.println(counter);
-//}
+}
 
 void loop()
 {
@@ -147,18 +148,18 @@ void loop()
   int read02 = analogRead(jackIn02_pin); //reading values coming from A1
   int read03 = analogRead(jackIn03_pin); //reading values coming from A2
   int read04 = analogRead(jackIn04_pin); //reading values coming from A3
-
-//  Serial.print("READ_01: ");
-//  Serial.println(read01);
-
-  Serial.print("READ_02: "); //NOT WORKING!!! read02 is not stable!!!
-  Serial.println(read02);
-//
-//  Serial.print("READ_03: ");
-//  Serial.println(read03);
-//
-//  Serial.print("READ_04: ");
-//  Serial.println(read04);
+  //
+//    Serial.print("READ_01: ");
+//    Serial.println(read01);
+  //
+//    Serial.print("READ_02: ");
+//    Serial.println(read02);
+  //
+//     Serial.print("READ_03: ");
+//     Serial.println(read03);
+  //
+    Serial.print("READ_04: ");
+    Serial.println(read04);
 
   int maxRead = Serial.read(); //initializing serial from max to arduino aka communicate to max
   if (maxRead == 5)
@@ -168,23 +169,72 @@ void loop()
 
   if (true)
   {
+
+
+//    for(int i = 0; i < 4; i++) {
+//
+//      int val = analogRead(i);
+//
+//      for(int n = 0; n < 4; n++) {
+//
+//        if(val >= (jackThresh[n] - range) && val <= (jackThresh[n] + range)) {
+//          isInRangeOf[i] = n;
+//        }
+//        
+//      }
+//      
+//    }
+//
+//    Serial.print(isInRangeOf[0]);
+//    Serial.print(isInRangeOf[1]);
+//    Serial.print(isInRangeOf[2]);
+//    Serial.println(isInRangeOf[3]);
+//
+//    delay(1000);
+
+
     for (int i = 0; i < 4; i++) //loop over from A0 to A4 comparing the value from the array.
     {
-      if (analogRead(i) >= (jackThresh[i] - range) && (analogRead(i) <= (jackThresh[i] + range)))
+
+      int val = analogRead(i);
+
+      if (val >= (jackThresh[i] - range) && (val <= (jackThresh[i] + range)))
       {
-        //      a[i] = '1'; //if the jackThresh[0] is == to jack thresh[0] aka correct connection
+        a[i] = '1'; //if the jackThresh[0] is == to jack thresh[0] aka correct connection
+
+        //        Serial.println("1 happened");
       }
-      else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
-      {
+
+
+      else if ( val <= (jackThresh[0] - range) && (val >= (jackThresh[0] + range)) &&
+                val <= (jackThresh[1] - range) && (val >= (jackThresh[1] + range)) &&
+                val <= (jackThresh[2] - range) && (val >= (jackThresh[2] + range)) &&
+                val <= (jackThresh[3] - range) && (val >= (jackThresh[3] + range))) {
+
         a[i] = '0'; //if its nothing is plug in aka noise
-        //        blowUp(a[i], i);
+        blowUp(a[i], i);
+        //        Serial.println("0 happened");
+
       }
+
+      //      else if (analogRead(i) != jackThresh[0] && analogRead(i) != jackThresh[1] && analogRead(i) != jackThresh[2] && analogRead(i) != jackThresh[3] )
+      //      {
+      //        a[i] = '0'; //if its nothing is plug in aka noise
+      //                blowUp(a[i], i);
+      //                Serial.println("0 happened");
+      //      }
+
       else
       {
         a[i] = '2'; //if its wrong jackThresh
-        //        blowUp(a[i],i);
+        blowUp(a[i], i);
+        //        Serial.println("2 happened");
       }
     }
+
+//    Serial.println(a);
+//
+//    delay(500);
   }
 };
 
