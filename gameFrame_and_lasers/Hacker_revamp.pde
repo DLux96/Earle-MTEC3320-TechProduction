@@ -5,7 +5,7 @@ void setup() {
   size(1280, 800);
   myIntroMovie = new Movie(this, "PewPew.mov");
   myMovie = new Movie(this, "Comp1.mov");
-  tickAnim  = new Movie(this, "clockAnim.mp4");
+  tickAnim  = new Movie(this, "clockAnim.mov");
   // photo = loadImage("test.png");
 
 
@@ -19,19 +19,17 @@ void setup() {
   textFont(clockFont, 80);
 
   //CONNECTIONS
-  /*
+/*
   String portName = Serial.list()[1]; //change the 0 to a 1 or 2 etc. to match your port
-   myPort = new Serial(this, portName, 9600);
-   */
+  myPort = new Serial(this, portName, 9600);
+  */
 }
 
 void draw() {
   introScene();
   ticking();
   startClock();
-  // printArray(Serial.list());
-  //  connectTest1();
-  
+
   //Winning - Condition
 }
 

@@ -38,7 +38,7 @@ PImage photo, maskImage;
 
 //NEW CLOCK
 
-float sec= 00,min = 1,hour = 14;
+float sec= 00, min = 1, hour = 14;
 color col = color(255);
 int interval  =  60;
 
@@ -52,7 +52,7 @@ float prevTime;
 //CONNECTION SETUP
 
 Serial myPort;
-String val;
+int val;
 
 boolean stopped = false ;
 boolean youWin = false;
@@ -67,9 +67,9 @@ boolean LasersOn = false;
 
 //Game States
 
-int game1Status;
-int game1Status2;
-int game1Status3;
+boolean puzzle1Solved = false;
+boolean puzzle2Solved = false;
+boolean puzzle3Solved = false;
 
 int laserState;
 //boolean laserTrip;
