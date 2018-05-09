@@ -3,7 +3,9 @@ SoftwareSerial mySerial(2, 3); //rx, tx
 
 String a = "0000";
 
-long lastDebounceTime = 0;
+unsigned long then = 0; //previous debounce time
+
+int debounce = 20; //debounce time
 
 int range = 5;
 
@@ -55,8 +57,6 @@ const int jackThresh04 = 275;
 
 const int jackThresh[] = {407, 225, 746, 760}; //needs to be changed!!!!
 
-
-
 int counter = 0;
 String prev = "0000";
 
@@ -99,7 +99,7 @@ void setup() {
   pinMode(led08G_pin, OUTPUT);
   pinMode(led08R_pin, OUTPUT);
 
-  int n = sizeof(jackThresh) / sizeof(jackThresh[0]); //what is this for????
+  int n = sizeof(jackThresh) / sizeof(jackThresh[0]); 
 
   randomize (jackThresh, n);// randomize the jackthresh array
 
@@ -166,7 +166,7 @@ void loop()
     maxRun = 1;
   }
 
-    if (true)
+    if (maxRun == true)
   {
     for (int i = 0; i < 4; i++) //loop over from A0 to A4 comparing the value from the array.
     {
