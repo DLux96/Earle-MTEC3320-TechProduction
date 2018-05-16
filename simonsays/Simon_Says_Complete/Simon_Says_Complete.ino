@@ -1,4 +1,4 @@
-  //4 Different Sequence that corresponds to each codename/color
+//4 Different Sequence that corresponds to each codename/color
 //Each player must input their sequence to be cleared from the alarm system
 //Once each player has entered their sequence, system resets, hackerman gives them the go
 //Game is complete
@@ -8,7 +8,7 @@
 //
 #include <SoftwareSerial.h>
 //  ARDUINO MEGA ONLY ADK
-SoftwareSerial mySerial(12,13); // RX = 13, TX =12
+SoftwareSerial mySerial(12, 13); // RX = 13 Black, TX =12 White
 
 
 int ledPins[] = {8, 9, 10, 11};
@@ -37,7 +37,7 @@ bool startGame = false;
 
 // Game gets command from Game System to start
 void setup() {
-  Serial.begin(9600);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  Serial.begin(9600);
   Serial.println("System Online");
   mySerial.begin(9600);
 
@@ -47,10 +47,10 @@ void setup() {
     pinMode(buttons[i], INPUT_PULLUP);
     //RED
     pinMode(24, OUTPUT);
-    
+
     //BLUE
     pinMode(26, OUTPUT);
-    
+
     //GREEN
     pinMode(25, OUTPUT);
   }
@@ -59,15 +59,15 @@ void setup() {
 
 void loop() {
 
-  
- if (startGame == true) {
 
-//    //create if statement that will run game when system is ready
+  if (startGame == true) {
 
-//    //Game System tells players they will get their pattern, they have to take
-//    //turns after each completed sequence
+    //    //create if statement that will run game when system is ready
 
-//    //gameState 0 begins, pattern is created, sequence prevented from repeating
+    //    //Game System tells players they will get their pattern, they have to take
+    //    //turns after each completed sequence
+
+    //    //gameState 0 begins, pattern is created, sequence prevented from repeating
     if (gameState == 0) {
       randomSeed(analogRead(4));
 
@@ -83,9 +83,9 @@ void loop() {
 
     }
 
-//    //gameState 1 begins, LEDs flash, pattern begins, 1st LED turns on, pattern displays
-   if (gameState == 1) {
-//      //LEDs are OFF
+    //    //gameState 1 begins, LEDs flash, pattern begins, 1st LED turns on, pattern displays
+    if (gameState == 1) {
+      //      //LEDs are OFF
       for (int i = 0; i < 4; i++) {
         digitalWrite(ledPins[i], LOW);
       }
@@ -101,13 +101,13 @@ void loop() {
       Serial.println("gameState = " + String(gameState));
     }
 
-//    //gameState 2 begins, user inputs the pattern, if pattern is correct move on to next gameState
-//    //if user input this in wrong, pattern resets, should have 3 tries max
+    //    //gameState 2 begins, user inputs the pattern, if pattern is correct move on to next gameState
+    //    //if user input this in wrong, pattern resets, should have 3 tries max
 
     if (gameState == 2) {
       for (int i = 0; i < patternLength; i++) {
         if (digitalRead(buttons[i]) == LOW && previousState[i] == HIGH) {
-//          // Button is pressed within a certain time so the button doesnt count multiple times
+          //          // Button is pressed within a certain time so the button doesnt count multiple times
           if (millis() > buttonsPR[i] + buttonsBuff) {
 
             userPattern[userIndex] = i;
@@ -134,8 +134,8 @@ void loop() {
           }
         }
 
-//        // Game System tells the players that the player got it correct after each time the
-//        // player gets it right
+        //        // Game System tells the players that the player got it correct after each time the
+        //        // player gets it right
 
 
         if (patternCorrect == true) {
@@ -157,20 +157,20 @@ void loop() {
           patternLength++;
           gameState = 0;
           Serial.println("gameState = " + String(gameState));
-//          // Resets the player's input
+          //          // Resets the player's input
           userIndex = 0;
           if (patternLength == 8) {
             gameState = 3;
-            
+
             //Send game engine the victory flag
             mySerial.write(19);
             Serial.println("gameState = " + String(gameState));
-            
+
           }
         }
 
-//        // Game System tells the players when they get something wrong and how many
-//        // chances they1 have left before the pattern changes.
+        //        // Game System tells the players when they get something wrong and how many
+        //        // chances they1 have left before the pattern changes.
 
         else if (patternCorrect == false) {
           digitalWrite(25, LOW);
@@ -209,30 +209,29 @@ void loop() {
         }
       }
     }
- }  
+  }
   else {
     //wait for serial acknowledgement for starting the game
+    Serial.println("Waiting for start signal");
+    delay(250);
+
     while (mySerial.available() > 0) {
       int inByte = mySerial.read();
+      Serial.println(inByte);
+      mySerial.write(inByte);
 
-      mySerial.println(inByte);
-      
+      // if serial data is a 10 or 19, its for us
       if (inByte >= 10 && inByte <= 19) {
-        if (inByte == 10){
-          
-        startGame = true;
+        if (inByte == 10) {
+          // 10 starts the game
+          startGame = true;
         }
       }
-
-  }  
-
-
       else {
+        // if its not a 10 or 19, send it along
         mySerial.write(inByte);
       }
-    Serial.println("Waiting for start signal");
-    delay(500);
     }
-  
- }
+  }
+}
 
