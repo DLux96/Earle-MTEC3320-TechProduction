@@ -19,7 +19,8 @@ void ticking()
 
 void startClock() {
   if (started2 == true) {
-//      delay(1000);
-      newClock();
-    }
+    //      delay(1000);
+    newClock();
+  //  game1();
   }
+}

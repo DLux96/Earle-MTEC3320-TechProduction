@@ -15,6 +15,7 @@ void newClock()
   if (min <= 0 && sec == 0) {
     stopped = true;
     println("LOST");
+    Loser();
   }
 
  

@@ -1,19 +1,20 @@
-void winCondition() {
-  /*
-  if(){
-   
-   
-   
-   
-   
-   
-   }
-   
-   */
+void YouWin() {
 
 
-  if (youWin== true) {
 
-    println("YOU WIN");
+  if (puzzle1Solved == true && puzzle2Solved == true) {
+
+    //Play win video
+    stopped = true;
+    println("I dont feel so good");
+
+    // file.play();
+    win.play();
   }
+}
+
+void Loser() {
+  //PLauy a sound
+  // A lose screen
+  //Game over????
 }
