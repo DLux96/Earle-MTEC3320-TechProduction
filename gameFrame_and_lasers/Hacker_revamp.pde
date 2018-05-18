@@ -11,6 +11,10 @@ void setup() {
   myIntroMovie = new Movie(this, "PewPew.mov");
   myMovie = new Movie(this, "Comp1.mov");
   tickAnim  = new Movie(this, "clockAnim.mov");
+<<<<<<< HEAD
+=======
+  // photo = loadImage("test.png");
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec
 
 
   myIntroMovie.play();
@@ -23,6 +27,7 @@ void setup() {
   textFont(clockFont, 80);
 
   //CONNECTIONS
+<<<<<<< HEAD
 
   String portName = Serial.list()[1]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);
@@ -47,15 +52,24 @@ void setup() {
   minim = new Minim(this);
   win = minim.loadFile("Victory.mp3");
    
+=======
+/*
+  String portName = Serial.list()[1]; //change the 0 to a 1 or 2 etc. to match your port
+  myPort = new Serial(this, portName, 9600);
+  */
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec
 }
 
 void draw() {
   introScene();
   ticking();
   startClock();
+<<<<<<< HEAD
   connectTest1();
   YouWin();
   game3();
+=======
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec
 
   //Winning - Condition
 }

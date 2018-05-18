@@ -1,5 +1,4 @@
-//FULLY COMPLETE VERSION
-//4 Different Sequence that corresponds to each codename/color
+  //4 Different Sequence that corresponds to each codename/color
 //Each player must input their sequence to be cleared from the alarm system
 //Once each player has entered their sequence, system resets, hackerman gives them the go
 //Game is complete
@@ -8,8 +7,8 @@
 //ss,succeed = **
 //
 #include <SoftwareSerial.h>
-
-SoftwareSerial mySerial(50, 52); // RX, TX
+//  ARDUINO MEGA ONLY ADK
+SoftwareSerial mySerial(13,3); // RX, TX
 
 
 int ledPins[] = {8, 9, 10, 11};
@@ -38,7 +37,7 @@ bool startGame = false;
 
 // Game gets command from Game System to start
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
   Serial.println("System Online");
   mySerial.begin(9600);
 
@@ -50,15 +49,17 @@ void setup() {
     pinMode(24, OUTPUT);
     
     //BLUE
-    pinMode(25, OUTPUT);
+    pinMode(26, OUTPUT);
     
     //GREEN
-    pinMode(26, OUTPUT);
+    pinMode(25, OUTPUT);
   }
 
 }
 
 void loop() {
+
+  
  if (startGame == true) {
 
 //    //create if statement that will run game when system is ready
@@ -160,7 +161,11 @@ void loop() {
           userIndex = 0;
           if (patternLength == 8) {
             gameState = 3;
+            
+            //Send game engine the victory flag
+            mySerial.write(19);
             Serial.println("gameState = " + String(gameState));
+            
           }
         }
 
@@ -204,18 +209,36 @@ void loop() {
         }
       }
     }
- }
+ }  
   else {
     //wait for serial acknowledgement for starting the game
     while (Serial.available() > 0) {
-      if (Serial.read() == '3') {
+      if (Serial.read() == '3'){
+//      int inByte = mySerial.read();
+//
+//      Serial.println(inByte);
+//      
+//      if (inByte >= 10 && inByte <= 19) {
+//        if (inByte == 10){
+          
         startGame = true;
+        }
       }
-    }
-
-    Serial.println("Waiting for start signal");
+      Serial.println("Waiting for start signal");
     delay(500);
   }
+      
+
+
+//      else {
+//        mySerial.write(inByte);
+//      }
+//    }
+    
+//
+//    Serial.println("Waiting for start signal");
+//    delay(500);
+  }
   
- }
+ //}
 

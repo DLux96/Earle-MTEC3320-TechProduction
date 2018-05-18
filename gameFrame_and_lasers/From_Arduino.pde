@@ -1,9 +1,13 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec
 void connectTest1() {
   if ( myPort.available() > 0) 
   {  // If data is available,
     val = myPort.read();         // read it and store it in val
+<<<<<<< HEAD
     println(val); //print it out in the console  /''''//'[
   }
 }
@@ -59,3 +63,14 @@ void lasers() {
     lasers = false;
   }
 }
+=======
+  }
+  println("solved"); //print it out in the console
+}
+
+//WIn condition
+void PuzzleCheck() {
+
+  
+}
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec

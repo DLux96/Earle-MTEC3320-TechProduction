@@ -52,7 +52,11 @@ PImage photo, maskImage;
 
 //NEW CLOCK
 
+<<<<<<< HEAD
 float sec= 00, min = 15 , hour = 14;
+=======
+float sec= 00, min = 1, hour = 14;
+>>>>>>> 342793fdcbaf96e1a490f4d3962c2cd7a1d6b9ec
 color col = color(255);
 int interval  =  60;
 
